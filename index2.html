@@ -266,7 +266,12 @@
 
                         <div class="main_about_content_area">
                             <div class="single_about_left_img">
-                                <img src="assets/images/ab.jpg" alt="" />
+                                <h1>Image classification using MobileNet</h1>
+                                    <p>The MobileNet model labeled this as
+                                        <span id="result">...</span> with a confidence of
+                                        <span id="probability">...</span></p>
+                                    <img src="https://ml5js.org/docs/assets/img/bird.jpg"
+                                         crossorigin="anonymous" id="image" width="400">
                             </div> 
 
 
@@ -848,6 +853,23 @@
                 scrollwheel: false,
                 lat: 6.6818942,
                 lng: -1.5751867
+            });
+        </script>
+        <script>
+            // The image we want to classify
+            const image = document.getElementById('image');
+            // The result tag in the HTML
+            const result = document.getElementById('result');
+            // The probability tag in the HTML
+            const probability = document.getElementById('probability');
+            // Initialize the Image Classifier method with MobileNet
+            const classifier = ml5.imageClassifier('MobileNet');
+            // Make a prediction with the selected image
+            // This will return an array with a default of 10 options with their probabilities
+            classifier.predict(image, function(results) {
+                result.innerText = results[0].className;
+                probability.innerText = results[0].probability.toFixed(4);
+                console.log(results)
             });
         </script>
 
